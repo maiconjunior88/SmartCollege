@@ -1,0 +1,47 @@
+<div *ngIf="teacherSelected || newTeacher">
+  <app-title [title]="'Info Teacher:'"></app-title>
+  <br />
+  <form [formGroup]="teacherForm" autofocus (ngSubmit)="submitForm();">
+    <div class="form-group">
+      <label for="name">Teacher Name</label>
+      <input type="text" class="form-control" formControlName="name" id="name" />
+    </div>
+    <div class="form-group">
+      <label for="birthdate">Birth Date</label>
+      <input type="date" value="MM/dd/yyyy" class="form-control" formControlName="birthDate" />
+    </div>
+    <div class="form-group">
+      <label for="salary">Salary</label>
+      <input type="number" class="form-control" formControlName="salary" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-danger" (click)="teacherDelete(teacherSelected.id)">Delete</button>&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-warning" (click)="teacherSelect()">Back</button>
+  </form>
+</div>
+
+<div *ngIf="!teacherSelected && !newTeacher">
+  <app-title [title]="title"></app-title>
+  <br />
+  Select a student. Or <a style="cursor:pointer; color:dodgerblue;" (click)="newTeacherForm()">Insert New</a>
+  <br />
+  <p *ngIf="!teachers"><em>Loading...</em></p>
+  <table class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Birth Date</th>
+        <th scope="col">Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let teacher of teachers" style="cursor:pointer;" (click)="teacherSelect(teacher)">
+        <td>{{teacher.id}}</td>
+        <td>{{teacher.name}}</td>
+        <td>{{teacher.birthDate  |  date:'MM/dd/yyyy'}}</td>
+        <td>{{teacher.salary}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

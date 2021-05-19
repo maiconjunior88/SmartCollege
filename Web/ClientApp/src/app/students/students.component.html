@@ -1,0 +1,42 @@
+<div *ngIf="studentSelected || newStudent">
+  <app-title [title]="'Info Student:'"></app-title>
+  <br />
+  <form [formGroup]="studentForm" autofocus (ngSubmit)="submitForm();">
+    <div class="form-group">
+      <label for="name">Student Name</label>
+      <input type="text" class="form-control" formControlName="name" id="name" />
+    </div>
+    <div class="form-group">
+      <label for="birthdate">Birth Date</label>
+      <input type="date" value="MM/dd/yyyy" class="form-control" formControlName="birthDate" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-danger" (click)="studentDelete(studentSelected.id)">Delete</button>&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-warning" (click)="studentSelect()">Back</button>
+  </form>
+</div>
+
+<div *ngIf="!studentSelected && !newStudent">
+  <app-title [title]="title"></app-title>
+  <br />
+  Select a student. Or <a style="cursor:pointer; color:dodgerblue;" (click)="newStudentForm()">Insert New</a>
+  <br />
+  <p *ngIf="!students"><em>Loading...</em></p>
+  <table class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students" style="cursor:pointer;" (click)="studentSelect(student)">
+        <td>{{student.id}}</td>
+        <td>{{student.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+

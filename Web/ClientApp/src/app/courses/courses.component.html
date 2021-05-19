@@ -1,0 +1,35 @@
+<div *ngIf="courseSelected || newCourse">
+  <app-title [title]="'Info Course:'"></app-title>
+  <br />
+  <form [formGroup]="courseForm" autofocus (ngSubmit)="submitForm();">
+    <div class="form-group">
+      <label for="name">Course Name</label>
+      <input type="text" class="form-control" formControlName="name" id="name" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-danger" (click)="courseDelete(courseSelected.id)">Delete</button>&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-warning" (click)="courseSelect()">Back</button>
+  </form>
+</div>
+
+<div *ngIf="!courseSelected && !newCourse">
+  <app-title [title]="title"></app-title>
+  <br />
+  Select a course. Or <a style="cursor:pointer; color:dodgerblue;" (click)="newCourseForm()">Insert New</a>
+  <br />
+  <p *ngIf="!courses"><em>Loading...</em></p>
+  <table class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of courses" style="cursor:pointer;" (click)="courseSelect(course)">
+        <td>{{course.id}}</td>
+        <td>{{course.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
