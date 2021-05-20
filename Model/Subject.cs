@@ -18,8 +18,8 @@ namespace Models
 
     public class SubjectList
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
+        public int SubjectID { get; set; }
+        public string SubjectName { get; set; }
         public int CourseID { get; set; }
         public string CourseName { get; set; }
     }

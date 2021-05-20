@@ -55,15 +55,13 @@ export class SubjectsComponent implements OnInit {
 
   subjectSelect(subject) {
 
-    console.log(subject);
-
     if (subject != null) {
       this.subjectSelected = subject;
 
       this.subjectForm = this.fb.group({
-        'id': subject.id,
+        'id': subject.subjectID,
         'courseID': subject.courseID,
-        'name': subject.name
+        'name': subject.subjectName
       });
 
     }
@@ -92,7 +90,7 @@ export class SubjectsComponent implements OnInit {
 
   submitForm() {
     var student: Subject = this.subjectForm.value;
-    student.id > 0 ? this.update() : this.insert();
+    student.subjectID > 0 ? this.update() : this.insert();
   }
 
   insert() {
@@ -120,8 +118,8 @@ export class SubjectsComponent implements OnInit {
 }
 
 interface Subject {
-  id: number,
-  name: string,
+  subjectID: number,
+  subjectName: string,
   courseID: number,
   courseName:string
 }

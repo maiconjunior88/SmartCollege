@@ -7,32 +7,33 @@
       <input type="text" class="form-control" formControlName="name" id="name" />
     </div>
     <div class="form-group">
-      <label for="course">Course Name</label>
-      <select name="sutendID" formControlName="sutendID">
-        <option [ngValue]="null">Choose a course</option>
-        <option *ngFor="let course of courses" [ngValue]="course.id">
-          {{course.name}}
-        </option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="teacher">Teacher Name</label>
-      <select name="teacherID" formControlName="teacherID">
-        <option [ngValue]="null">Choose a course</option>
+      <label for="subject">Course Name</label>
+      <select name="id" formControlName="id">
+        <option [ngValue]="null">Choose a Subject</option>
         <option *ngFor="let subject of subjects" [ngValue]="subject.id">
-          {{subject.name}}
+          {{subject.subjectName}}
         </option>
       </select>
     </div>
-    <div class="form-group">
-      <label for="subject">Subject Name</label>
-      <select name="subjectID" formControlName="subjectID">
-        <option [ngValue]="null">Choose a subject</option>
-        <option *ngFor="let student of students" [ngValue]="student.id">
-          {{student.name}}
-        </option>
-      </select>
-    </div>
+
+    <!--<div class="form-group">
+    <label for="course">Course Name</label>
+    <select name="courseID" formControlName="courseID">
+      <option [ngValue]="null">Choose a course</option>
+      <option *ngFor="let course of courses" [ngValue]="course.courseID">
+        {{course.courseName}}
+      </option>
+    </select>
+  </div>-->
+    <!--<div class="form-group">
+    <label for="subject">Subject Name</label>
+    <select name="studentID" formControlName="studentID">
+      <option [ngValue]="null">Choose a subject</option>
+      <option *ngFor="let student of students" [ngValue]="student.studentID">
+        {{student.studentName}}
+      </option>
+    </select>
+  </div>-->
     <button type="submit" class="btn btn-primary">Save</button>&nbsp;&nbsp;&nbsp;
     <button class="btn btn-danger">Delete</button>&nbsp;&nbsp;&nbsp;
     <button class="btn btn-warning">Back</button>
@@ -42,9 +43,9 @@
 <div *ngIf="!gradeSelected && !newGrade">
   <app-title [title]="title"></app-title>
   <br />
-  Select a grade. Or <a style="cursor:pointer; color:dodgerblue;">Insert New</a>
+  Select a grade. Or <a style="cursor:pointer; color:dodgerblue;" (click)="newGradeForm()">Insert New</a>
   <br />
-  <p *ngIf="!grade"><em>Loading...</em></p>
+  <p *ngIf="!subjects"><em>Loading...</em></p>
   <table class="table table-hover">
     <thead class="thead-light">
       <tr>
@@ -53,9 +54,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let grade of grade" style="cursor:pointer;" (click)="gradeSelect(grade)">
-        <td>{{grade.id}}</td>
-        <td>{{grade.name}}</td>
+      <tr *ngFor="let subject of subjects" style="cursor:pointer;" (click)="gradeSelect(subject)">
+        <td>{{subject.id}}</td>
+        <td>{{subject.subjectName}}</td>
       </tr>
     </tbody>
   </table>

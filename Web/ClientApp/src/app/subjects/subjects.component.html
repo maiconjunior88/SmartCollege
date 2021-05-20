@@ -16,7 +16,7 @@
       </select>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>&nbsp;&nbsp;&nbsp;
-    <button class="btn btn-danger" (click)="subjectDelete(subjectSelected.id)">Delete</button>&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-danger" (click)="subjectDelete(subjectSelected.subjectID)">Delete</button>&nbsp;&nbsp;&nbsp;
     <button class="btn btn-warning" (click)="subjectSelect()">Back</button>
   </form>
 </div>
@@ -38,7 +38,7 @@
     <tbody>
       <tr *ngFor="let subject of subjects" style="cursor:pointer;" (click)="subjectSelect(subject)">
         <td>{{subject.id}}</td>
-        <td>{{subject.name}}</td>
+        <td>{{subject.subjectName}}</td>
         <td>{{subject.courseName}}</td>
       </tr>
     </tbody>

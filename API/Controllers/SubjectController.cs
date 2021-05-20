@@ -28,7 +28,7 @@ namespace API.Controllers
 
         // POST api/<SubjectController>
         [HttpPost]
-        public void Post(Models.Subject subject)
+        public void Post(Models.SubjectList subject)
         {
             Business.Subjects s = new();
             s.Create(subject);

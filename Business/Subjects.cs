@@ -7,11 +7,15 @@ namespace Business
 {
     public class Subjects
     {
-        public int Create(Models.Subject subject)
+        public int Create(Models.SubjectList subject)
         {
             using (DB.EF.DBContext db = new DB.EF.DBContext())
             {
-                db.Subject.Add(subject);
+                Models.Subject sub = new Subject();
+                sub.CourseID = subject.CourseID;
+                sub.Name = subject.SubjectName;
+
+                db.Subject.Add(sub);
 
                 return db.SaveChanges();
             }
@@ -37,8 +41,8 @@ namespace Business
                            join c in db.Course on s.CourseID equals c.ID
                            select new SubjectList
                            {
-                               ID = s.ID,
-                               Name = s.Name,
+                               SubjectID = s.ID,
+                               SubjectName = s.Name,
                                CourseID = s.CourseID,
                                CourseName = c.Name
                            }).ToList();

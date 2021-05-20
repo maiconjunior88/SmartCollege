@@ -10,17 +10,55 @@ import { environment } from '../../environments/environment';
 })
 export class GradeComponent implements OnInit {
 
-  title = 'Subjects';
+  title = 'Grade';
 
   public subjects: Array<Subject>;
-  public courses: Array<Course>;
-  public students: Array<Student>;
   private subjectPath = environment.URL_API + 'Subject';
-  private coursePath = environment.URL_API + 'Course';
-  private studentPath = environment.URL_API + 'Student';
+
+  gradeForm: FormGroup;
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
+    this.gradeForm = this.fb.group({
+      'id': 0,
+      'subjectID': 0,
+      'name': ['']
+    });
+  }
 
+  newGradeForm() {
+
+    console.log(this.subjects)
+
+    this.newGrade = true;
+
+    this.gradeForm.reset({
+      'id': 0,
+      'subjectID': 0,
+      'name': '',
+    });
+  }
+
+  public gradeSelected: Subject;
+  public newGrade: boolean;
+
+  gradeSelect(grade) {
+
+    if (grade != null) {
+      this.gradeSelected = grade;
+
+      this.gradeForm = this.fb.group({
+        'id': grade.id,
+        'subjectID': grade.subjecID,
+        'name': grade.name
+      });
+
+    }
+    else {
+      this.gradeSelected = null;
+      this.newGrade = false;
+
+      this.newGradeForm() 
+    }
   }
 
   GetListSubject() {
@@ -29,41 +67,14 @@ export class GradeComponent implements OnInit {
     }, error => console.error(error));
   }
 
-  GetListCourse() {
-    this.http.get<Course[]>(this.coursePath).subscribe(result => {
-      this.courses = result;
-    }, error => console.error(error));
-  }
-
-  GetListStudent() {
-    this.http.get<Student[]>(this.studentPath).subscribe(result => {
-      this.students = result;
-    }, error => console.error(error));
-  }
-
   ngOnInit() {
     this.GetListSubject();
-    this.GetListCourse();
-    this.GetListStudent();
   }
 }
 
 interface Subject {
   id: number,
-  name: string,
-  courseID: number,
-  courseName: string
+  subjectName: string
 }
 
-interface Course {
-  id: number,
-  name: string
-}
-
-interface Student
-{
-  id: number,
-  name: string,
-  birthDate: Date,
-}
 
