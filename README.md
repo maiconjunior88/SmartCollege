@@ -16,3 +16,10 @@ Node.js
 Angular CLI
 
 => npm install -g @angular/cli
+
+DB/EF/DBContext.cs
+
+Database.SetInitializer<DBContext>(new CreateDatabaseIfNotExists<DBContext>());
+//Database.SetInitializer<CollegeDBContext>(new DropCreateDatabaseAlways<CollegeDBContext>());
+//Database.SetInitializer<CollegeDBContext>(new DropCreateDatabaseIfModelChanges<CollegeDBContext>());
+Database.SetInitializer<DBContext>(new Infrastructure.Seed.DbInitializer());
