@@ -1,7 +1,7 @@
 # SmartCollege
 Create a CRUD of the entities (Courses, Subjects, Teacher, Student, Grades) 
 
-Requisitos:
+Requirements:
 
 Node.js
 => https://nodejs.org/en/
